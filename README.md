@@ -3,7 +3,7 @@ A simple banking system that allows users to manage their accounts, make deposit
 withdrawals, and check balances.
 
 ## Features
-- [ ] Create a New Account
+- [x] Create a New Account
 - [ ] Deposit Funds
 - [ ] Withdraw Funds
 - [ ] Check Balance
