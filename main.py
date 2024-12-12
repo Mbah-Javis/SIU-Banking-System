@@ -110,4 +110,3 @@ while True:
         get_choice(choice)
     except ValueError:
         print("Invalid input. Please enter a number.")
-
