@@ -50,7 +50,7 @@ def create_new_account():
 # Display the current balance
 def check_balance():
     account_system = read_database()
-    acc =input("enter your account ID").strip
+    acc =input("Enter your account ID")
  # search and display of Account
     for account in account_system:
          if account[0].isdigit==str(acc):
