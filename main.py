@@ -71,7 +71,7 @@ def get_choice(choice):
     elif choice == 3:
         print("Withdraw Funds")
     elif choice == 4:
-        print("Check Balance")
+        check_balance()
     elif choice == 5:
         print("Transfer Funds")
     elif choice == 6:
