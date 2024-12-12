@@ -46,6 +46,23 @@ def create_new_account():
     print(f"{account_number:<15} {full_name:<15} {str(date_created):<15} {initial_deposit}")
     print("\n")
 
+
+# Display the current balance
+def check_balance():
+    account_system = read_database()
+    acc =input("enter your account ID").strip
+ # search and display of Account
+    for account in account_system:
+         if account[0].isdigit==str(acc):
+          print("\n Balance Sheet")
+          print(f"Account ID : {account[0]}")
+          print(f"Account Name: {account[1]}")
+          print(f"Amount in Account : {account[2]}XAF")
+
+         return
+
+    print(f"The account '{acc}' is not found") 
+
 def get_choice(choice):
     if choice == 1:
         create_new_account()
