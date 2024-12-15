@@ -11,7 +11,7 @@ def transfer_funds():
                     receiver_id =str(input("\n enter your receiver's Id account")).strip()
                     receiver_id = read_database()
                     for  receiver_account in accounts:
-                         if receiver_account[0] == receiver_id[0] and len(receiver_account) > 0:
+                         if receiver_account[0] == receiver_id and len(receiver_account) > 0:
                             receiver_balance = float(receiver_account[3]) 
                             sender_balance = sender_balance - amount
                             receiver_balance = receiver_balance + amount
@@ -20,8 +20,8 @@ def transfer_funds():
                             save_to_database(sender)
                             save_to_database(receiver)
                             print("\n The transfer completed successfully")   
-                         else:
-                            print("\n Your receiver does not have an account in SIU Banking system") 
+                    else:
+                        print("\n Your receiver does not have an account in SIU Banking system") 
                  else:
                      print("\n Sorry! You do not have enough money for this transaction")  
                      operation =str(input("\n If you want to retry type 0 ,else,press any key")).strip()
@@ -29,10 +29,10 @@ def transfer_funds():
                         transfer_funds()
                      else:
                         return      
-            else:
-                 print("\nYou do not have an account in SIU Banking system")  
-                 answer = str(input("\n If you want to create an account type 1 ,else press any key")).strip()  
-                 if answer ==  1 :
-                      create_new_account()
-                 else:
-                      return
+    else:
+         print("\nYou do not have an account in SIU Banking system")  
+         answer = str(input("\n If you want to create an account type 1 ,else press any key")).strip()  
+         if answer ==  1 :
+             create_new_account()
+         else:
+             return
