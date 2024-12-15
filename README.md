@@ -6,7 +6,7 @@ withdrawals, and check balances.
 - [x] Create a New Account
 - [ ] Deposit Funds
 - [ ] Withdraw Funds
-- [ ] Check Balance
+- [x] Check Balance
 - [ ] Transfer Funds
 - [ ] Delete Account
 
