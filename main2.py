@@ -15,10 +15,9 @@ def transfer_funds():
                             receiver_balance = float(receiver_account[3]) 
                             sender_balance = sender_balance - amount
                             receiver_balance = receiver_balance + amount
-                            sender = [sender_account[0], sender_account[1], sender_account[2], str(sender_balance)]
-                            receiver = [receiver_account[0], receiver_account[1], receiver_account[2], str(receiver_balance)]
-                            save_to_database(sender)
-                            save_to_database(receiver)
+                            sender_account[3] =  str(sender_balance)
+                            receiver_account =  str(receiver_balance)
+                            save_to_database(accounts)
                             print("\n The transfer completed successfully")   
                     else:
                         print("\n Your receiver does not have an account in SIU Banking system") 
@@ -30,9 +29,9 @@ def transfer_funds():
                      else:
                         return      
     else:
-         print("\nYou do not have an account in SIU Banking system")  
-         answer = str(input("\n If you want to create an account type 1 ,else press any key")).strip()  
-         if answer ==  1 :
-             create_new_account()
-         else:
-             return
+                  print("\nYou do not have an account in SIU Banking system")  
+                  answer = str(input("\n If you want to create an account type 1 ,else press any key")).strip()  
+                  if answer ==  1 :
+                     create_new_account()
+                  else:
+                     return
