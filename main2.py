@@ -29,9 +29,9 @@ def transfer_funds():
                      else:
                         return      
     else:
-                  print("\nYou do not have an account in SIU Banking system")  
-                  answer = str(input("\n If you want to create an account type 1 ,else press any key")).strip()  
-                  if answer ==  1 :
-                     create_new_account()
-                  else:
-                     return
+            print("\nYou do not have an account in SIU Banking system")  
+            answer = str(input("\n If you want to create an account type 1 ,else press any key")).strip()  
+            if answer ==  1 :
+                create_new_account()
+            else:
+                return
