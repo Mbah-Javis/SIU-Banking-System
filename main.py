@@ -49,18 +49,19 @@ def create_new_account():
 
 # Display the current balance
 def check_balance():
-    account_system = read_database()
-    acc =input("Enter your account ID")
- # search and display of Account
-    for account in account_system:
-         if account[0].isdigit==str(acc):
-          print("\n Balance Sheet")
-          print(f"Account ID : {account[0]}")
-          print(f"Account Name: {account[1]}")
-          print(f"Amount in Account : {account[2]}XAF")
-
-         return
-
+    accounts = read_database()
+    acc =input("Enter your account ID: ")
+    # search and display of Account
+    for account in accounts:
+        if account[0] == acc :
+            print("\n Balance Sheet")
+            print(f"Account ID : {account[0]}")
+            print(f"Account Name: {account[1]}")
+            print(f"Date Created: {account[2]}")
+            print(f"Amount: {account[3]}XAF")
+            
+            return
+        
     print(f"The account '{acc}' is not found") 
 
 def get_choice(choice):
