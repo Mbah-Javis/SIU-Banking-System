@@ -129,6 +129,20 @@ def transfer_funds():
         else:
             return
 
+def delete_account():
+    accounts = read_database()
+    account = input("Enter Account ID: ").strip()
+    
+    # Find and remove account
+    for i, item in enumerate(accounts):
+        if item[0] == account:
+            del accounts[i]
+            save_to_database(accounts)
+            print(f"Account '{account}' deleted successfully!\n")
+            return
+    
+    print(f"Item '{account}' not found in the database.")
+
 def display_accounts():
     acct=read_database()
     if not  acct:
@@ -152,7 +166,7 @@ def get_choice(choice):
     elif choice == 5:
         transfer_funds()
     elif choice == 6:
-        print("Delete Account")
+        delete_account()
     elif choice == 7:
         display_accounts()
     elif choice == 0:
