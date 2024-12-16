@@ -87,7 +87,7 @@ def check_balance():
 
 def withdraw_funds():
     accounts = read_database()
-    acc_id =input("Enter your account ID: ")
+    acc_id = input("Enter your account ID: ")
     for account in accounts:
         if account[0] == acc_id:
             try:
@@ -107,19 +107,21 @@ def withdraw_funds():
             except ValueError:
                 print("Invalid amount. Please try again\n")
                 return
-    else:
-        print("Account not found\n")
-        return
+    print("Account not found\n")
+    return
 
 def transfer_funds():
     print("$ Welcome to the transfer funds process $")
-    print("*" *42)
+    print("-" *42)
     accounts = read_database()
     sender_id =input("Enter your account Id: ").strip()
     for sender_account in accounts:
         if sender_account[0] == sender_id:
             sender_balance = float(sender_account[3])
-            amount = float(input("\n Enter the amount you want to send: "))
+            try:
+                amount = float(input("\n Enter the amount you want to send: "))
+            except ValueError:
+                print("Invalid amount entered")
             if amount > 0 and amount <= sender_balance:
                 receiver_id =input("\n Enter your receiver's Id account: ").strip()
                 for  receiver_account in accounts:
