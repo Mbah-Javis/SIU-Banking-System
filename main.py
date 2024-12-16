@@ -2,7 +2,7 @@ import csv
 import random
 from datetime import date
 
-db_name = 'database.csv'
+db_name = "SIU-Banking-System/database.csv"
 
 # Read database csv file
 def read_database():
@@ -47,9 +47,22 @@ def create_new_account():
     print("\n")
 
 def show_balance():
-    
-    print(f"Your balance is ${balance:.2f}")
+    accounts = read_database()
+    #account_number = generate_account_number()
+    check=(input("enter your account id: "))
+    for i in accounts:
+        if i[0]== check:
+                    print(f"Your Current balance is {i[3]} XAF")
+                    return
+                   
+    print("This account does not exist")
+                    
+tab = read_database()
+# print("\n",tab)
 
+    
+    #print(f"Your balance is ${balance:.2f}")
+#deposit func
 def deposit_funds():
     # 1. read database accounts
     # 2. take users account Id
@@ -60,15 +73,64 @@ def deposit_funds():
     # 5. Deposit completed
     #print("Create New Account")
     items=read_database()
-    amount=(float(input("Ennter the amount to be deposited: ")))
-    if amount<0:
-        print("Please enter a valid amount")
-        return 0
-    else:
+    user_id=str(input("Enter the account ID: "))
+    # while True: 
+    #     try:
+  
+    for i in items:
+                
+                        
+                        if i[0] == user_id:
+                            
+                            old_balance=float(i[3])
         
-        print("Your transaction has beenn done successfully")
-        return amount
-balance=0
+                        
+                            while True:
+                                try:
+                                    amount= float(input("Enter the amount to be deposited: ")).strip()
+                                    if(amount<0):
+                                        print("The amount enterred can't be negative")
+
+                                        continue
+                                        
+                                    i[3]=(old_balance+amount)
+                                    save_to_database(items)
+                                    print(f"the '{amount}'has been deposited successfully")
+                                    return
+                                    #     print(f"The transaction to {user_id} of {amount} XAF has been done successfully ")
+                                    #     continue
+                                    # break
+
+                                    # while True:
+                                    #     try:
+                                    #         amount=(float(input("Enter the amount to be deposited: ")))
+                                    #         if(amount<0):
+                                    #             print("The amount enterred can't be negative")
+                                    #             continue
+                                #         break
+                                except ValueError:
+                                    print("Enter a valid amount")
+        # except ValueError:
+        #      print("Enter a valid  else create an account")
+
+
+                
+
+                        print(f"The Account {user_id} does not exist")
+#display all Accounts 
+def display_accounts():
+     acct=read_database()
+     if not  acct:
+          print("Database is empty")
+          return
+     print("-"*62)
+     for i in acct:
+          print(f"{i[0]:<20} {i[1]:<15} {i[2]:<10} {i[3]} ")
+
+                 
+        
+        
+    
 def get_choice(choice):
     if choice == 1:
         create_new_account()
@@ -83,7 +145,8 @@ def get_choice(choice):
     elif choice == 6:
         print("Delete Account")
     elif choice == 7:
-        print("List All Accounts")
+        #print("List All Accounts")
+        display_accounts()
     elif choice == 0:
         print("Exiting SIU Bank System. Goodbye!")
         exit()
@@ -110,10 +173,10 @@ print("-" * 44)
 print(f"{'':<5}WELCOME TO SIU BANKING SYSTEM {'':<5}")
 print("-" * 44)
 while True:
-    try:
-        menu()
-        choice = int(input("\nEnter Your Choice : "))
-        get_choice(choice)
-    except ValueError:
-        print("Invalid input. Please enter a number.")
+     try:
+         menu()
+         choice = int(input("\nEnter Your Choice : "))
+         get_choice(choice)
+     except ValueError:
+         print("Invalid input. Please enter a number.")
 
