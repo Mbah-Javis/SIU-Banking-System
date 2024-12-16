@@ -90,6 +90,56 @@ def withdraw_funds():
         print("Account not found\n")
         return
 
+def transfer_funds():
+    print("$ Welcome to the transfer funds process $")
+    print("*" *42)
+    accounts = read_database()
+    sender_id =input("Enter your account Id: ").strip()
+    for sender_account in accounts:
+        if sender_account[0] == sender_id:
+            sender_balance = float(sender_account[3])
+            amount = float(input("\n Enter the amount you want to send: "))
+            if amount > 0 and amount <= sender_balance:
+                receiver_id =input("\n Enter your receiver's Id account: ").strip()
+                for  receiver_account in accounts:
+                    if receiver_account[0] == receiver_id:
+                        receiver_balance = float(receiver_account[3]) 
+                        sender_balance = sender_balance - amount
+                        receiver_balance = receiver_balance + amount
+                        sender_account[3] = str(sender_balance)
+                        receiver_account[3] = str(receiver_balance)
+                        save_to_database(accounts)
+                        print(f"\n The transfer of {amount} FCFA to {receiver_account[1]} has been completed successfully!\n")
+                        return
+                else:
+                    print("\n Your receiver does not have an account in SIU Banking system")
+                    return
+            else:
+                print("\n Sorry! You do not have enough money for this transaction")  
+                operation = input("\n If you want to retry type 0 ,else,press any key").strip()
+                if operation == 0 :
+                    transfer_funds()
+                else:
+                    return
+    else:
+        print("\nYou do not have an account in SIU Banking system")  
+        answer = str(input("\n If you want to create an account type 1 ,else press any key")).strip()  
+        if answer ==  1 :
+            create_new_account()
+        else:
+            return
+
+def display_accounts():
+    acct=read_database()
+    if not  acct:
+        print("Database is empty")
+        return
+    print("-"*62)
+    for i in acct:
+        print(f"{i[0]:<20} {i[1]:<15} {i[2]:<15} {i[3]} ")
+        print("-"*62)
+    print("\n")
+
 def get_choice(choice):
     if choice == 1:
         create_new_account()
@@ -100,11 +150,11 @@ def get_choice(choice):
     elif choice == 4:
         check_balance()
     elif choice == 5:
-        print("Transfer Funds")
+        transfer_funds()
     elif choice == 6:
         print("Delete Account")
     elif choice == 7:
-        print("List All Accounts")
+        display_accounts()
     elif choice == 0:
         print("Exiting SIU Bank System. Goodbye!")
         exit()
