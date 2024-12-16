@@ -46,6 +46,27 @@ def create_new_account():
     print(f"{account_number:<15} {full_name:<15} {str(date_created):<15} {initial_deposit}")
     print("\n")
 
+def deposit_ammount():
+    items = read_database()
+    account_id = input("Enter Account ID: ").strip()
+    
+    # Find and update item
+    for item in items:
+        if item[0] == account_id:
+            while True:
+                try:
+                    new_deposit = float(input("Enter Amount to Deposit: "))
+                    if new_deposit < 0:
+                        print("Amount cannot be negative. Please try again.")
+                        continue
+                    item[3] = str(float(item[3]) + new_deposit)
+                    save_to_database(items)
+                    print(f"'{new_deposit}' Deposited successfully!\n")
+                    return
+                except ValueError:
+                    print("Invalid input. Please enter a number.")
+    
+    print(f"Account '{account_id}' not found in the database.")
 
 # Display the current balance
 def check_balance():
@@ -158,7 +179,7 @@ def get_choice(choice):
     if choice == 1:
         create_new_account()
     elif choice == 2:
-        print("Deposit Funds")
+        deposit_ammount()
     elif choice == 3:
         withdraw_funds()
     elif choice == 4:
