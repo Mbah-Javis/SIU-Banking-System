@@ -64,13 +64,39 @@ def check_balance():
         
     print(f"The account '{acc}' is not found") 
 
+def withdraw_funds():
+    accounts = read_database()
+    acc_id =input("Enter your account ID: ")
+    for account in accounts:
+        if account[0] == acc_id:
+            try:
+                amount = float(input("Enter amount to withdraw: "))
+                if amount <= 0:
+                    print("Amount must be greater than zero. Please try again")
+                    continue
+                current_balance = float(account[3])
+                if amount > current_balance:
+                    print("Insufficient funds")
+                    return
+                else:
+                    account[3] = str(current_balance - amount)
+                    save_to_database(accounts)
+                    print(f"Withdrawal of {amount} successful!")
+                    return
+            except ValueError:
+                print("Invalid amount. Please try again\n")
+                return
+    else:
+        print("Account not found\n")
+        return
+
 def get_choice(choice):
     if choice == 1:
         create_new_account()
     elif choice == 2:
         print("Deposit Funds")
     elif choice == 3:
-        print("Withdraw Funds")
+        withdraw_funds()
     elif choice == 4:
         check_balance()
     elif choice == 5:
